@@ -4,6 +4,9 @@ import { dataCards } from "../../../constants"
 const CommonBox = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 650px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  padding: 30px;
 `
 
 const ImageAndDataBox = styled.div`
@@ -13,13 +16,13 @@ const ImageAndDataBox = styled.div`
 const Stack = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 40px;
 `
 
-const Name = styled.h2`
+const NameProduct = styled.h2`
   display: inline-block;
-  max-width: 600px;
-  font-size: 18px;
+  font-size: 22px;
+  margin: 0 0 25px 0;
 `
 
 const Image = styled.img`
@@ -29,8 +32,7 @@ const Image = styled.img`
 
 const DataBox = styled.dl`
   display: flex;
-  flex-direction: column;
-  max-width: 500px;
+  max-width: ${props => props.$maxWidth || '500px'};
   width: 100%;
   margin: 0;
 `
@@ -38,36 +40,34 @@ const DataBox = styled.dl`
 const KeyValueBox = styled.div`
   display: flex;
   max-width: 300px;
-  justify-content: space-between;
+  flex-direction: column;
+  font-size: 20px;
+  align-items: center;
 
   &:nth-child(1n):not(:last-child) {
-    margin-bottom: 5px;
+    margin-right: 30px;
   }
 `
 
-const DateAdditionBox = styled(KeyValueBox)`
+const DateAdditionBox = styled.div`
+  display: flex;
   justify-content: end;
+  color: #808080;
+  width: 100%;
+  font-size: 15px;
 `
 
 const Key = styled.dt`
-  &::after {
-    content: ${props => props.$withoutColon ? "" : "':'"};
-  }
+  margin-bottom: 5px;
 `
 
 const Value = styled.dd`
   font-weight: 600;
-  margin-left: ${props => props.$marginLeft || '15px'};
+  margin: ${props => props.$margin || 0};
 
   &::after {
    content: ${props => props.$withoutCostSymbol ? "" : "'₽'"};
   }
-`
-
-const PriceSubtitle = styled.h6`
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 15px 0;
 `
 
 
@@ -75,21 +75,18 @@ function Card() {
   return (
     <>
       {
-        dataCards.map((card) => {
+        dataCards.map((card, id) => {
           const { name, dateAddition, price, image } = card;
           const { start, current, target } = price;
 
           return (
-            <CommonBox>
-              <Name>{name}</Name>
+            <CommonBox key={id}>
+              <NameProduct>{name}</NameProduct>
 
               <ImageAndDataBox>
                 <Image src={image} />
 
-
                 <Stack>
-                  <PriceSubtitle>Цена</PriceSubtitle>
-
                   <DataBox>
                     <KeyValueBox>
                       <Key>Начальная</Key>
@@ -108,17 +105,15 @@ function Card() {
                     </KeyValueBox>
                   </DataBox>
                 </Stack>
-
-
-                <DataBox>
-                  <DateAdditionBox>
-                    <Key $withoutColon>добавлено</Key>
-                    <Value $withoutCostSymbol $marginLeft="5px">{dateAddition}</Value>
-                  </DateAdditionBox>
-                </DataBox>
-
-
               </ImageAndDataBox>
+
+
+              <DataBox $maxWidth="100%">
+                <DateAdditionBox>
+                  <Key>добавлено</Key>
+                  <Value $withoutCostSymbol $margin="0 0 0 5px">{dateAddition}</Value>
+                </DateAdditionBox>
+              </DataBox>
 
             </CommonBox>
           )

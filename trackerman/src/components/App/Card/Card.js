@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import { dataCards } from "../../../constants"
+import editIcon from '../../../images/icons/edit.svg'
 
 const CommonBox = styled.div`
   display: flex;
@@ -70,8 +71,37 @@ const Value = styled.dd`
   }
 `
 
+const TargetValue = styled(Value)`
+  transition: 0.1s ease-in;
+`
+
+const BoxTargetValueAndEditIcon = styled.div`
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+    color: #d1d1d1;
+  }
+
+  &:hover > img {
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+const EditIcon = styled.img`
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.1s ease-in;
+`
+
 
 function Card() {
+
   return (
     <>
       {
@@ -101,7 +131,12 @@ function Card() {
 
                     <KeyValueBox>
                       <Key>Целевая</Key>
-                      <Value>{target}</Value>
+
+                      <BoxTargetValueAndEditIcon>
+                        <TargetValue>{target}</TargetValue>
+                        <EditIcon src={editIcon} />
+                      </BoxTargetValueAndEditIcon>
+
                     </KeyValueBox>
                   </DataBox>
                 </Stack>

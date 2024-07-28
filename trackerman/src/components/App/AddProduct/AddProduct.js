@@ -10,10 +10,15 @@ const AddIcon = styled.img`
     cursor: pointer;
     filter: invert(83%) sepia(0%) saturate(2469%) hue-rotate(38deg) brightness(90%) contrast(86%);
   }
+  
 `
 
 function AddProduct() {
-  return (<AddIcon src={addIcon}></AddIcon>)
+  function handleOnClick() {
+    window.modalAddProduct.showModal()
+  }
+
+  return (<AddIcon src={addIcon} onClick={handleOnClick}></AddIcon>)
 }
 
 export default AddProduct;

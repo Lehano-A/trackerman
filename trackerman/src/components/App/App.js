@@ -1,16 +1,16 @@
 import '../../fonts/fonts.css';
 import Main from '../Main/Main';
 import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
-import AddProduct from '../AddProduct/AddProduct';
+import ButtonAddProduct from '../ButtonAddProduct/ButtonAddProduct';
 import Card from "../Card/Card";
 
 
 function App() {
   return (
     <Main>
-      <AddProduct />
+      <ButtonAddProduct />
       <ModalAddProduct />
-      <Card/>
+      <Card />
     </Main>
   );
 }

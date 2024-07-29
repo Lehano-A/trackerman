@@ -14,7 +14,7 @@ const AddIcon = styled.img`
   }
 `
 
-function AddProduct() {
+function ButtonAddProduct() {
 
   function handleOnClick() {
     window.modalAddProduct.showModal()
@@ -27,4 +27,4 @@ function AddProduct() {
   )
 }
 
-export default AddProduct;
+export default ButtonAddProduct;

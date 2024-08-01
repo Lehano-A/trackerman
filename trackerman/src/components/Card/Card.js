@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import { dataCards } from "../../constants"
 import editIcon from '../../images/icons/edit.svg'
 
-const CommonBox = styled.div`
+const CommonBox = styled.article`
   display: flex;
   flex-direction: column;
   max-width: 650px;

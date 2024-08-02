@@ -113,20 +113,30 @@ const BoxTargetValueAndEditIcon = styled.div`
     color: #d1d1d1;
   }
 
-  &:hover > img {
+  &:hover > button {
     visibility: visible;
     opacity: 1;
   }
 `
 
-const EditIcon = styled.img`
-  visibility: hidden;
-  opacity: 0;
+const ButtonEditTargetPrice = styled.button`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  visibility: hidden;
+  opacity: 0;
   transition: 0.1s ease-in;
+  cursor: pointer;
+`
+
+const EditIcon = styled.img`
+  height: 100%;
+  width: 100%;
 `
 
 
@@ -165,7 +175,10 @@ function Card() {
 
                       <BoxTargetValueAndEditIcon>
                         <TargetValue>{target}</TargetValue>
-                        <EditIcon src={editIcon} />
+
+                        <ButtonEditTargetPrice title="Редактировать целевую стоимость">
+                          <EditIcon src={editIcon} alt="Иконка редактирования" />
+                        </ButtonEditTargetPrice>
                       </BoxTargetValueAndEditIcon>
 
                     </KeyValueBox>

@@ -3,6 +3,7 @@ import Main from '../Main/Main';
 import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
 import ButtonAddProduct from '../ButtonAddProduct/ButtonAddProduct';
 import Card from "../Card/Card";
+import Cards from '../Cards/Cards';
 
 
 function App() {
@@ -10,7 +11,10 @@ function App() {
     <Main>
       <ButtonAddProduct />
       <ModalAddProduct />
-      <Card />
+      
+      <Cards>
+        <Card />
+      </Cards>
     </Main>
   );
 }

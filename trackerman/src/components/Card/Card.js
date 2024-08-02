@@ -3,11 +3,19 @@ import { dataCards } from "../../constants"
 import editIcon from '../../images/icons/edit.svg'
 
 const CommonBox = styled.article`
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 650px;
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   padding: 30px;
+`
+
+const SequenceNumber = styled.span`
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: #d0cecf;
 `
 
 const ImageAndDataBox = styled.div`
@@ -111,6 +119,7 @@ function Card() {
 
           return (
             <CommonBox key={id}>
+              <SequenceNumber>{id}</SequenceNumber>
               <NameProduct>{name}</NameProduct>
 
               <ImageAndDataBox>

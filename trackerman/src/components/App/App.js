@@ -8,14 +8,10 @@ import Cards from '../Cards/Cards';
 
 function App() {
   return (
-    <Main>
-      <ButtonAddProduct />
-      <ModalAddProduct />
-      
-      <Cards>
-        <Card />
-      </Cards>
-    </Main>
+    <Main />
+
+
+
   );
 }
 

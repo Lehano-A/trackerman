@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
-import { dataCards } from "../../constants"
 import editIcon from '../../images/icons/edit.svg'
 import ButtonDeleteCard from './ButtonDeleteCard/ButtonDeleteCard'
+
 
 const CommonBox = styled.article`
   position: relative;
@@ -119,66 +119,61 @@ const EditIcon = styled.img`
 `
 
 
-function Card() {
+function Card({ dataCard, handleDeleteCard }) {
+
+  const { id, name, dateAddition, price, image } = dataCard;
+  const { start, current, target } = price;
+
 
   return (
-    <>
-      {
-        dataCards.map((card, id) => {
-          const { name, dateAddition, price, image } = card;
-          const { start, current, target } = price;
+    <CommonBox key={id}>
+      <SequenceNumber>{id}</SequenceNumber>
+      <NameProduct>{name}</NameProduct>
 
-          return (
-            <CommonBox key={id}>
-              <SequenceNumber>{id}</SequenceNumber>
-              <NameProduct>{name}</NameProduct>
+      <ImageAndDataBox>
+        <Image src={image} />
 
-              <ImageAndDataBox>
-                <Image src={image} />
+        <Stack>
+          <DataBox>
+            <KeyValueBox>
+              <Key>Начальная</Key>
+              <Value>{start}</Value>
+            </KeyValueBox>
 
-                <Stack>
-                  <DataBox>
-                    <KeyValueBox>
-                      <Key>Начальная</Key>
-                      <Value>{start}</Value>
-                    </KeyValueBox>
-
-                    <KeyValueBox>
-                      <Key>Текущая</Key>
-                      <Value>{current}</Value>
-                    </KeyValueBox>
+            <KeyValueBox>
+              <Key>Текущая</Key>
+              <Value>{current}</Value>
+            </KeyValueBox>
 
 
-                    <KeyValueBox>
-                      <Key>Целевая</Key>
+            <KeyValueBox>
+              <Key>Целевая</Key>
 
-                      <BoxTargetValueAndEditIcon>
-                        <TargetValue>{target}</TargetValue>
+              <BoxTargetValueAndEditIcon>
+                <TargetValue>{target}</TargetValue>
 
-                        <ButtonEditTargetPrice title="Редактировать целевую стоимость">
-                          <EditIcon src={editIcon} alt="Иконка редактирования" />
-                        </ButtonEditTargetPrice>
-                      </BoxTargetValueAndEditIcon>
+                <ButtonEditTargetPrice title="Редактировать целевую стоимость">
+                  <EditIcon src={editIcon} alt="Иконка редактирования" />
+                </ButtonEditTargetPrice>
+              </BoxTargetValueAndEditIcon>
 
-                    </KeyValueBox>
-                  </DataBox>
-                </Stack>
-              </ImageAndDataBox>
+            </KeyValueBox>
+          </DataBox>
+        </Stack>
+      </ImageAndDataBox>
 
 
-              <DataBox $maxWidth="100%">
-                <DateAdditionBox>
-                  <Key>добавлено</Key>
-                  <Value $withoutCostSymbol $margin="0 0 0 5px">{dateAddition}</Value>
-                </DateAdditionBox>
-              </DataBox>
+      <DataBox $maxWidth="100%">
+        <DateAdditionBox>
+          <Key>добавлено</Key>
+          <Value $withoutCostSymbol $margin="0 0 0 5px">{dateAddition}</Value>
+        </DateAdditionBox>
+      </DataBox>
 
-              <ButtonDeleteCard />
-            </CommonBox>
-          )
-        })
-      }
-    </>
+      <ButtonDeleteCard dataDeletingCard={dataCard} handleDeleteCard={() => handleDeleteCard(id)} />
+    </CommonBox>
+
+
   )
 }
 

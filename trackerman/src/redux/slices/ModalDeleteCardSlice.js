@@ -9,7 +9,6 @@ export const modalDeleteCardSlice = createSlice({
   name: 'modalDeleteCard',
   initialState,
   reducers: {
-
     showModal: (state) => {
       state.isVisible = true
     },

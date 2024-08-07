@@ -1,5 +1,8 @@
 import styled from "styled-components"
 import deleteIcon from '../../../images/icons/delete.svg'
+import { useDispatch } from "react-redux"
+import { saveDataDeletingCard, showModal } from "../../../redux/slices/modalDeleteCardSlice"
+
 
 const ButtonDelete = styled.button`
   position: absolute;
@@ -23,9 +26,18 @@ const DeleteIcon = styled.img`
 `
 
 
-function ButtonDeleteCard() {
+function ButtonDeleteCard({ dataDeletingCard }) {
+
+  const dispatch = useDispatch()
+
+
+  function handleOnClick() {
+    dispatch(saveDataDeletingCard(dataDeletingCard))
+    dispatch(showModal())
+  }
+
   return (
-    <ButtonDelete title="Удалить карточку">
+    <ButtonDelete title="Удалить карточку" onClick={handleOnClick}>
       <DeleteIcon src={deleteIcon} alt="Иконка удаления"></DeleteIcon>
     </ButtonDelete>
   )

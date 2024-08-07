@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import Modal from "../../Common/Modal/Modal"
 import { useDispatch, useSelector } from "react-redux"
-import { hideModal } from "../../../redux/slices/ModalDeleteCardSlice"
+import { hideModal } from "../../../redux/slices/modalDeleteCardSlice"
 import { useEffect } from "react"
+import { saveDataProducts } from "../../../redux/slices/productsSlice"
 
 const CommonBox = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ function ModalDeleteCard() {
 
   const dispatch = useDispatch()
 
+  const dataProducts = useSelector((state) => state.products.data)
   const dataDeletingCard = useSelector((state) => state.modalDeleteCard.dataDeletingCard)
   const isVisibleModal = useSelector((state) => state.modalDeleteCard.isVisible)
 
@@ -52,8 +54,18 @@ function ModalDeleteCard() {
   }, [isVisibleModal])
 
 
+  
   function handleCloseModal() {
     dispatch(hideModal())
+  }
+
+
+  function handleDeleteCard() {
+    const filteredCards = dataProducts.filter((item) => (item.id !== dataDeletingCard.id))
+
+    dispatch(saveDataProducts(filteredCards))
+    dispatch(hideModal())
+    window.modalDeleteCard.close()
   }
 
 
@@ -64,7 +76,7 @@ function ModalDeleteCard() {
         <span>{dataDeletingCard.name}</span>
 
         <ButtonBox>
-          <Button>Да</Button>
+          <Button onClick={handleDeleteCard}>Да</Button>
           <Button onClick={handleCloseModal}>Отмена</Button>
         </ButtonBox>
       </CommonBox>

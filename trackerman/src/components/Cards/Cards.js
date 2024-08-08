@@ -5,10 +5,11 @@ import Card from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { saveDataProducts } from "../../redux/slices/productsSlice";
 
+
 const CommonBox = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,  minmax(600px, 700px));
   justify-content: center;
-  flex-wrap: wrap;
   gap: 30px;
 `
 

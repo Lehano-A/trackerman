@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import addIcon from "../../images/icons/add.svg"
+import { useSelector } from "react-redux";
 
 const Button = styled.button`
-  width: 30px;
-  height: 30px;
+  width: ${(props) => props.$totalCards ? "50px" : "130px"};
+  height: ${(props) => props.$totalCards ? "50px" : "130px"};
   border-radius: 50%;
   border: none;
   padding: 0;
@@ -22,12 +23,14 @@ const AddIcon = styled.img`
 
 function ButtonAddProduct() {
 
+  const productsData = useSelector((state) => state.products.data)
+
   function handleOnClick() {
     window.modalAddProduct.showModal()
   }
 
   return (
-    <Button onClick={handleOnClick} title="Добавить новый товар">
+    <Button $totalCards={productsData?.length} onClick={handleOnClick} title="Добавить новый товар">
       <AddIcon src={addIcon} alt="Иконка 'Добавить'" />
     </Button>
   )

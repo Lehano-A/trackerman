@@ -49,11 +49,11 @@ function Modal({ children, callbackCloseModal, modalName, handleOnSubmit }) {
 
 
   function handleClose() {
-    callbackCloseModal()
+    callbackCloseModal && callbackCloseModal()
     window[modalName].close()
   }
 
-  
+
   return (
     <Dialog id={modalName} onSubmit={handleOnSubmit}>
 

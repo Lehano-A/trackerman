@@ -1,3 +1,4 @@
+// let dataCards = []
 let dataCards = [
   {
     id: 'sdfsd1',

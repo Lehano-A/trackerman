@@ -62,7 +62,7 @@ function ModalAddProduct() {
 
 
   return (
-    <Modal modalName='modalAddProduct' onSubmit={handleOnSubmit}>
+    <Modal modalName='modalAddProduct' handleOnSubmit={handleOnSubmit}>
       <CommonBox>
         <Title>Добавление нового товара</Title>
 

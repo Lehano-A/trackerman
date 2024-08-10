@@ -119,7 +119,7 @@ const EditIcon = styled.img`
 `
 
 
-function Card({ dataCard, handleDeleteCard }) {
+function Card({ dataCard, sequenceNumber }) {
 
   const { id, name, dateAddition, price, image } = dataCard;
   const { start, current, target } = price;
@@ -127,7 +127,7 @@ function Card({ dataCard, handleDeleteCard }) {
 
   return (
     <CommonBox key={id}>
-      <SequenceNumber>{id}</SequenceNumber>
+      <SequenceNumber>{sequenceNumber}</SequenceNumber>
       <NameProduct>{name}</NameProduct>
 
       <ImageAndDataBox>
@@ -170,10 +170,8 @@ function Card({ dataCard, handleDeleteCard }) {
         </DateAdditionBox>
       </DataBox>
 
-      <ButtonDeleteCard dataDeletingCard={dataCard} handleDeleteCard={() => handleDeleteCard(id)} />
+      <ButtonDeleteCard dataDeletingCard={dataCard} />
     </CommonBox>
-
-
   )
 }
 

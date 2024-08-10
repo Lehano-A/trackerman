@@ -28,11 +28,12 @@ function Cards() {
   return (
     <CommonBox>
       {
-        dataProducts?.map((data) => {
+        dataProducts?.map((data, id) => {
           return (
             <Card
               key={data.id}
               dataCard={data}
+              sequenceNumber={id}
             />
           )
         })

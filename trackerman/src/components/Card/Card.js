@@ -121,7 +121,7 @@ const EditIcon = styled.img`
 
 function Card({ dataCard, sequenceNumber }) {
 
-  const { id, name, dateAddition, price, image } = dataCard;
+  const { id, name, dateAddition, price, imageURL } = dataCard;
   const { start, current, target } = price;
 
 
@@ -131,7 +131,7 @@ function Card({ dataCard, sequenceNumber }) {
       <NameProduct>{name}</NameProduct>
 
       <ImageAndDataBox>
-        <Image src={image} />
+        <Image src={imageURL} />
 
         <Stack>
           <DataBox>

@@ -9,7 +9,7 @@ let dataCards = [
       current: '230',
       target: '195'
     },
-    image: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd2',
@@ -20,7 +20,7 @@ let dataCards = [
       current: '230',
       target: '195'
     },
-    image: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd3',
@@ -31,7 +31,7 @@ let dataCards = [
       current: '230',
       target: '195'
     },
-    image: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd4',
@@ -42,7 +42,7 @@ let dataCards = [
       current: '230',
       target: '195'
     },
-    image: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   }
 ]
 

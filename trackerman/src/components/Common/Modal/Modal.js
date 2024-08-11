@@ -2,7 +2,7 @@ import styled from "styled-components"
 import close from "../../../images/icons/close.svg"
 
 const Dialog = styled.dialog`
-  position: relative;
+  position: fixed;
   max-width: 650px;
   width: 100%;
   z-index: 99999;

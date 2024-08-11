@@ -29,10 +29,15 @@ const Stack = styled.div`
   margin: 0 0 0 40px;
 `
 
+const TitleLink = styled.a`
+  color: #000;
+  margin-bottom: 25px;
+`
+
 const NameProduct = styled.h2`
   display: inline-block;
   font-size: 22px;
-  margin: 0 0 25px 0;
+  margin: 0;
 `
 
 const Image = styled.img`
@@ -121,14 +126,17 @@ const EditIcon = styled.img`
 
 function Card({ dataCard, sequenceNumber }) {
 
-  const { id, name, dateAddition, price, imageURL } = dataCard;
+  const { id, name, dateAddition, price, url, imageURL } = dataCard;
   const { start, current, target } = price;
 
 
   return (
     <CommonBox key={id}>
       <SequenceNumber>{sequenceNumber}</SequenceNumber>
-      <NameProduct>{name}</NameProduct>
+
+      <TitleLink href={url} target="_blank" referrerPolicy="no-referrer">
+        <NameProduct>{name}</NameProduct>
+      </TitleLink>
 
       <ImageAndDataBox>
         <Image src={imageURL} />

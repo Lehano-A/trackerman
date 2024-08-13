@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import Modal from "../Common/Modal/Modal"
+import api from "../../api/api"
+import { useState } from "react"
 
 const CommonBox = styled.div`
   display: flex;
@@ -55,11 +57,18 @@ const Submit = styled.button`
 
 function ModalAddProduct() {
 
+  const [urlNewProduct, setUrlNewProduct] = useState('')
 
   function handleOnSubmit(e) {
     e.preventDefault()
+
+    api.addProduct(urlNewProduct)
+      .then((res) => console.log('Ответ от сервера: ', res))
   }
 
+  function handleOnChange(e) {
+    setUrlNewProduct(e.target.value)
+  }
 
   return (
     <Modal modalName='modalAddProduct' handleOnSubmit={handleOnSubmit}>
@@ -68,9 +77,9 @@ function ModalAddProduct() {
 
         <Form>
           <Label htmlFor="linkToProduct">Ссылка на товар</Label>
-          <Input type="url" id="linkToProduct" />
+          <Input onChange={handleOnChange} type="url" id="linkToProduct" />
         </Form>
-        <Submit>Отправить</Submit>
+        <Submit type="submit">Отправить</Submit>
       </CommonBox>
     </Modal>
   )

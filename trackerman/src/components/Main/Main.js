@@ -26,6 +26,7 @@ const BoxButtonAddProduct = styled.div`
 
 function Main() {
 
+  const isVisibleModalAddProduct = useSelector((state) => state.modalAddProduct.isVisible)
   const isVisibleModalDeleteCard = useSelector((state) => state.modalDeleteCard.isVisible)
   const productsData = useSelector((state) => state.products.data)
 
@@ -38,8 +39,7 @@ function Main() {
         </BoxButtonAddProduct>
       }
 
-      <ModalAddProduct />
-
+      {isVisibleModalAddProduct && <ModalAddProduct />}
       {isVisibleModalDeleteCard && <ModalDeleteCard />}
 
       {productsData?.length === 0 ? <MessageAddFirstProduct /> : <Cards />}

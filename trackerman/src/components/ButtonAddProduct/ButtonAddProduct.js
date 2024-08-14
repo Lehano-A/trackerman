@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import addIcon from "../../images/icons/add.svg"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { showModalAddProduct } from "../../redux/slices/modalAddProductSlice";
+import { useEffect } from "react";
 
 const Button = styled.button`
   width: ${(props) => props.$totalCards ? "50px" : "130px"};
@@ -22,11 +24,20 @@ const AddIcon = styled.img`
 `
 
 function ButtonAddProduct() {
+  const dispatch = useDispatch()
 
+  const isVisibleModalAddProduct = useSelector((state) => state.modalAddProduct.isVisible)
   const productsData = useSelector((state) => state.products.data)
 
+  useEffect(() => {
+    if (isVisibleModalAddProduct) {
+      window.modalAddProduct.showModal()
+    }
+  }, [isVisibleModalAddProduct])
+
+
   function handleOnClick() {
-    window.modalAddProduct.showModal()
+    dispatch(showModalAddProduct())
   }
 
   return (

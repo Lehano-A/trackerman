@@ -2,12 +2,17 @@ import styled from "styled-components"
 import Modal from "../Common/Modal/Modal"
 import api from "../../api/api"
 import { useState } from "react"
+import { CircularProgress } from "@mui/material"
+import { useDispatch } from "react-redux"
+import { hideModalAddProduct } from "../../redux/slices/modalAddProductSlice"
 
 const CommonBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  position: relative;
+  min-height: 250px;
 `
 
 const Title = styled.h3`
@@ -53,14 +58,28 @@ const Submit = styled.button`
   cursor: pointer;
 `
 
+const BoxLoader = styled.div`
+ position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+const Loader = styled(CircularProgress)`
+ filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(147deg) brightness(83%) contrast(89%);
+`
 
 
 function ModalAddProduct() {
 
+  const dispatch = useDispatch()
+
   const [urlNewProduct, setUrlNewProduct] = useState('')
+  const [isPressedSubmit, setIsPressedSubmit] = useState(false)
 
   function handleOnSubmit(e) {
     e.preventDefault()
+    setIsPressedSubmit(true)
 
     api.addProduct(urlNewProduct)
       .then((res) => console.log('Ответ от сервера: ', res))
@@ -70,16 +89,32 @@ function ModalAddProduct() {
     setUrlNewProduct(e.target.value)
   }
 
-  return (
-    <Modal modalName='modalAddProduct' handleOnSubmit={handleOnSubmit}>
-      <CommonBox>
-        <Title>Добавление нового товара</Title>
+  function runCallbackCloseModal() {
+    dispatch(hideModalAddProduct())
+  }
 
-        <Form>
-          <Label htmlFor="linkToProduct">Ссылка на товар</Label>
-          <Input onChange={handleOnChange} type="url" id="linkToProduct" />
-        </Form>
-        <Submit type="submit">Отправить</Submit>
+  return (
+    <Modal
+      modalName='modalAddProduct'
+      callbackCloseModal={runCallbackCloseModal}
+      handleOnSubmit={handleOnSubmit}
+    >
+      <CommonBox>
+        {isPressedSubmit ? <BoxLoader><Loader /></BoxLoader>
+
+          :
+
+          <>
+            <Title>Добавление нового товара</Title>
+
+            <Form>
+              <Label htmlFor="linkToProduct">Ссылка на товар</Label>
+              <Input onChange={handleOnChange} type="url" id="linkToProduct" required />
+              <Submit type="submit">Отправить</Submit>
+            </Form>
+
+          </>
+        }
       </CommonBox>
     </Modal>
   )

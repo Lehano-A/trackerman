@@ -1,6 +1,11 @@
 import { styled } from 'styled-components'
-import editIcon from '../../images/icons/edit.svg'
 import ButtonDeleteCard from './ButtonDeleteCard/ButtonDeleteCard'
+import KeyValue from './KeyValue/KeyValue'
+import ImageProduct from './ImageProduct/ImageProduct'
+import NameLink from './NameLink/NameLink'
+import { getDate } from '../../helpers/getDate'
+import Key from '../Common/Key/Key'
+import Value from '../Common/Value/Value'
 
 
 const CommonBox = styled.article`
@@ -29,39 +34,11 @@ const Stack = styled.div`
   margin: 0 0 0 40px;
 `
 
-const TitleLink = styled.a`
-  color: #000;
-  margin-bottom: 25px;
-`
-
-const NameProduct = styled.h2`
-  display: inline-block;
-  font-size: 22px;
-  margin: 0;
-`
-
-const Image = styled.img`
-  width: 150px;
-  height: 150px;
-`
-
 const DataBox = styled.dl`
   display: flex;
   max-width: ${props => props.$maxWidth || '500px'};
   width: 100%;
   margin: 0;
-`
-
-const KeyValueBox = styled.div`
-  display: flex;
-  max-width: 300px;
-  flex-direction: column;
-  font-size: 20px;
-  align-items: center;
-
-  &:nth-child(1n):not(:last-child) {
-    margin-right: 30px;
-  }
 `
 
 const DateAdditionBox = styled.div`
@@ -72,100 +49,28 @@ const DateAdditionBox = styled.div`
   font-size: 15px;
 `
 
-const Key = styled.dt`
-  margin-bottom: 5px;
-`
-
-const Value = styled.dd`
-  font-weight: 600;
-  margin: ${props => props.$margin || 0};
-
-  &::after {
-   content: ${props => props.$withoutCostSymbol ? "" : "'₽'"};
-  }
-`
-
-const TargetValue = styled(Value)`
-  transition: 0.1s ease-in;
-`
-
-const BoxTargetValueAndEditIcon = styled.div`
-  position: relative;
-
-  &:hover {
-    cursor: pointer;
-    color: #d1d1d1;
-  }
-
-  &:hover > button {
-    visibility: visible;
-    opacity: 1;
-  }
-`
-
-const ButtonEditTargetPrice = styled.button`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  border: 0;
-  width: 40px;
-  height: 40px;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.1s ease-in;
-  cursor: pointer;
-`
-
-const EditIcon = styled.img`
-  height: 100%;
-  width: 100%;
-`
-
 
 function Card({ dataCard, sequenceNumber }) {
 
-  const { id, name, dateAddition, price, url, imageURL } = dataCard;
-  const { start, current, target } = price;
+  const { id, name, createdAt, price, productUrl, imageUrl } = dataCard
+  const { withCard } = price
+  const { start, current, target } = withCard
 
 
   return (
     <CommonBox key={id}>
       <SequenceNumber>{sequenceNumber}</SequenceNumber>
 
-      <TitleLink href={url} target="_blank" referrerPolicy="no-referrer">
-        <NameProduct>{name}</NameProduct>
-      </TitleLink>
+      <NameLink link={productUrl}>{name}</NameLink>
 
       <ImageAndDataBox>
-        <Image src={imageURL} />
+        <ImageProduct imageUrl={imageUrl} />
 
         <Stack>
           <DataBox>
-            <KeyValueBox>
-              <Key>Начальная</Key>
-              <Value>{start}</Value>
-            </KeyValueBox>
-
-            <KeyValueBox>
-              <Key>Текущая</Key>
-              <Value>{current}</Value>
-            </KeyValueBox>
-
-
-            <KeyValueBox>
-              <Key>Целевая</Key>
-
-              <BoxTargetValueAndEditIcon>
-                <TargetValue>{target}</TargetValue>
-
-                <ButtonEditTargetPrice title="Редактировать целевую стоимость">
-                  <EditIcon src={editIcon} alt="Иконка редактирования" />
-                </ButtonEditTargetPrice>
-              </BoxTargetValueAndEditIcon>
-
-            </KeyValueBox>
+            <KeyValue data={{ key: 'Начальная', value: start }} />
+            <KeyValue data={{ key: 'Текущая', value: current }} />
+            <KeyValue data={{ key: 'Целевая', value: target }} type="edit" />
           </DataBox>
         </Stack>
       </ImageAndDataBox>
@@ -174,7 +79,12 @@ function Card({ dataCard, sequenceNumber }) {
       <DataBox $maxWidth="100%">
         <DateAdditionBox>
           <Key>добавлено</Key>
-          <Value $withoutCostSymbol $margin="0 0 0 5px">{dateAddition}</Value>
+          <Value options={{
+            withoutCostSymbol: true,
+            margin: "0 0 0 5px"
+          }}>
+            {getDate(createdAt)}
+          </Value>
         </DateAdditionBox>
       </DataBox>
 

@@ -12,6 +12,7 @@ const Button = styled.button`
   padding: 0;
   background-color: transparent;
 `
+
 const AddIcon = styled.img`
   transition: 0.1s ease-in;
   height: 100%;
@@ -39,6 +40,7 @@ function ButtonAddProduct() {
   function handleOnClick() {
     dispatch(showModalAddProduct())
   }
+
 
   return (
     <Button $totalCards={productsData?.length} onClick={handleOnClick} title="Добавить новый товар">

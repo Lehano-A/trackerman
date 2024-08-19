@@ -5,23 +5,33 @@ class Api {
   }
 
 
-  getProducts() {
+  getProductList() {
     return fetch(`${this.baseUrl}/products`)
       .then((res) => { return this._getResponse(res) })
   }
 
 
-  addProduct(url) {
-    return fetch(`${this.baseUrl}/products/add`, {
+  sendProductUrl(productUrl) {
+    return fetch(`${this.baseUrl}/products/sendProductUrl`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-      body: JSON.stringify({ url: url })
+      body: JSON.stringify({ productUrl })
     })
       .then((res) => { return this._getResponse(res) })
   }
 
+  addNewProduct(data) {
+    return fetch(`${this.baseUrl}/products/addNew`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({ data })
+    })
+      .then((res) => { return this._getResponse(res) })
+  }
 
   _getResponse(res) {
     if (!res.ok) {

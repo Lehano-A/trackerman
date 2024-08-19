@@ -19,7 +19,6 @@ const Dialog = styled.dialog`
   }
 `
 
-
 const ButtonClose = styled.button`
   position: absolute;
   top: 0;
@@ -45,7 +44,7 @@ const IconClose = styled.img`
 `
 
 
-function Modal({ children, callbackCloseModal, modalName, handleOnSubmit }) {
+function Modal({ children, callbackCloseModal, modalName }) {
 
 
   function handleClose() {
@@ -55,13 +54,14 @@ function Modal({ children, callbackCloseModal, modalName, handleOnSubmit }) {
 
 
   return (
-    <Dialog id={modalName} onSubmit={handleOnSubmit}>
+    <Dialog id={modalName}>
 
       <ButtonClose title="Закрыть" onClick={handleClose}>
         <IconClose src={close} />
       </ButtonClose>
 
       {children}
+
     </Dialog>
   )
 }

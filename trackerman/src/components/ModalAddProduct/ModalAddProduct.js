@@ -3,8 +3,13 @@ import Modal from "../Common/Modal/Modal"
 import api from "../../api/api"
 import { useState } from "react"
 import { CircularProgress } from "@mui/material"
-import { useDispatch } from "react-redux"
-import { hideModalAddProduct } from "../../redux/slices/modalAddProductSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { disableLoadingIndicator, enableLoadingIndicator, hideModalAddProduct } from "../../redux/slices/modalAddProductSlice"
+import Form from "../Common/Form/Form"
+import Label from "../Common/Form/Label/Label"
+import Input from "../Common/Form/Input/Input"
+import Submit from "../Common/Form/Submit/Submit"
+import PreviewNewProduct from "./PreviewNewProduct/PreviewNewProduct"
 
 const CommonBox = styled.div`
   display: flex;
@@ -17,45 +22,6 @@ const CommonBox = styled.div`
 
 const Title = styled.h3`
   margin: 0 0 50px 0;
-`
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`
-
-const Label = styled.label`
-  margin-bottom: 5px;
-`
-
-const Input = styled.input`
-  height: 25px;
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:nth-child(1n) {
-    margin-bottom: 15px;
-  }
-
-  &:last-of-type {
-    margin-bottom: 45px;
-  }
-`
-
-const Submit = styled.button`
-  width: 150px;
-  height: 40px;
-  font-size: 15px;
-  align-self: center;
-  cursor: pointer;
 `
 
 const BoxLoader = styled.div`
@@ -75,45 +41,64 @@ function ModalAddProduct() {
   const dispatch = useDispatch()
 
   const [urlNewProduct, setUrlNewProduct] = useState('')
-  const [isPressedSubmit, setIsPressedSubmit] = useState(false)
+  const [dataNewProduct, setDataNewProduct] = useState(null)
+  const isActiveLoadingIndicator = useSelector((state) => state.modalAddProduct.isActiveLoadingIndicator)
+
 
   function handleOnSubmit(e) {
     e.preventDefault()
-    setIsPressedSubmit(true)
 
-    api.addProduct(urlNewProduct)
-      .then((res) => console.log('Ответ от сервера: ', res))
+    dispatch(enableLoadingIndicator())
+
+    api.sendProductUrl(urlNewProduct)
+      .then((res) => setDataNewProduct(res))
+      .catch((err) => console.log(err))
+      .finally(() => dispatch(disableLoadingIndicator()))
   }
+
 
   function handleOnChange(e) {
     setUrlNewProduct(e.target.value)
   }
 
+
   function runCallbackCloseModal() {
     dispatch(hideModalAddProduct())
   }
+
 
   return (
     <Modal
       modalName='modalAddProduct'
       callbackCloseModal={runCallbackCloseModal}
-      handleOnSubmit={handleOnSubmit}
     >
       <CommonBox>
-        {isPressedSubmit ? <BoxLoader><Loader /></BoxLoader>
+        {
+          isActiveLoadingIndicator ?
 
-          :
+            <BoxLoader><Loader /></BoxLoader>
 
-          <>
-            <Title>Добавление нового товара</Title>
+            : !isActiveLoadingIndicator && !dataNewProduct ?
 
-            <Form>
-              <Label htmlFor="linkToProduct">Ссылка на товар</Label>
-              <Input onChange={handleOnChange} type="url" id="linkToProduct" required />
-              <Submit type="submit">Отправить</Submit>
-            </Form>
+              <>
+                <Title>Добавление нового товара</Title>
 
-          </>
+                <Form handleOnSubmit={handleOnSubmit}>
+                  <Label options={{ htmlFor: 'inputLinkToProduct' }}>Ссылка на товар</Label>
+                  <Input options={{
+                    id: 'inputLinkToProduct',
+                    minLength: 1,
+                    type: 'url',
+                    handleOnChange: handleOnChange,
+                    required: true
+                  }} />
+                  <Submit type="submit">Отправить</Submit>
+                </Form>
+              </>
+
+              :
+
+              <PreviewNewProduct data={dataNewProduct} />
         }
       </CommonBox>
     </Modal>

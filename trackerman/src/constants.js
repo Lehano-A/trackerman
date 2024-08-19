@@ -10,7 +10,7 @@ let dataCards = [
       target: '195'
     },
     url: 'https://www.ozon.ru/search/?deny_category_prediction=true&from_global=true&text=Карабин+альпинистский&product_id=1608925462',
-    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageUrl: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd2',
@@ -22,7 +22,7 @@ let dataCards = [
       target: '195'
     },
     url: 'https://www.ozon.ru/search/?deny_category_prediction=true&from_global=true&text=Карабин+альпинистский&product_id=1608925462',
-    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageUrl: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd3',
@@ -34,7 +34,7 @@ let dataCards = [
       target: '195'
     },
     url: 'https://www.ozon.ru/search/?deny_category_prediction=true&from_global=true&text=Карабин+альпинистский&product_id=1608925462',
-    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageUrl: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   },
   {
     id: 'sdfsd4',
@@ -46,7 +46,7 @@ let dataCards = [
       target: '195'
     },
     url: 'https://www.ozon.ru/search/?deny_category_prediction=true&from_global=true&text=Карабин+альпинистский&product_id=1608925462',
-    imageURL: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
+    imageUrl: 'https://ir-3.ozone.ru/s3/multimedia-1-k/wc1000/7057025228.jpg'
   }
 ]
 

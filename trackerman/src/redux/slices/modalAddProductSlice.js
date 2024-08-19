@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isVisible: null,
+  isActiveLoadingIndicator: false,
 }
 
 export const modalAddProductSlice = createSlice({
@@ -15,10 +16,23 @@ export const modalAddProductSlice = createSlice({
     hideModalAddProduct: (state) => {
       state.isVisible = false
     },
+
+    enableLoadingIndicator: (state) => {
+      state.isActiveLoadingIndicator = true
+    },
+
+    disableLoadingIndicator: (state) => {
+      state.isActiveLoadingIndicator = false
+    },
   },
 })
 
 
-export const { showModalAddProduct, hideModalAddProduct } = modalAddProductSlice.actions
+export const {
+  showModalAddProduct,
+  hideModalAddProduct,
+  enableLoadingIndicator,
+  disableLoadingIndicator
+} = modalAddProductSlice.actions
 
 export default modalAddProductSlice.reducer

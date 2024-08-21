@@ -33,6 +33,17 @@ class Api {
       .then((res) => { return this._getResponse(res) })
   }
 
+  deleteProduct(id) {
+    return fetch(`${this.baseUrl}/products/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({ id })
+    })
+      .then((res) => { return this._getResponse(res) })
+  }
+
   _getResponse(res) {
     if (!res.ok) {
       return Promise.reject(res.json())

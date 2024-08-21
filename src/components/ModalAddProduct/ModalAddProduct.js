@@ -2,7 +2,6 @@ import styled from "styled-components"
 import Modal from "../Common/Modal/Modal"
 import api from "../../api/api"
 import { useState } from "react"
-import { CircularProgress } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { disableLoadingIndicator, enableLoadingIndicator, hideModalAddProduct } from "../../redux/slices/modalAddProductSlice"
 import Form from "../Common/Form/Form"
@@ -10,29 +9,19 @@ import Label from "../Common/Form/Label/Label"
 import Input from "../Common/Form/Input/Input"
 import Submit from "../Common/Form/Submit/Submit"
 import PreviewNewProduct from "./PreviewNewProduct/PreviewNewProduct"
+import Preloader from "../Preloader/Preloader"
 
 const CommonBox = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  position: relative;
   min-height: 250px;
 `
 
 const Title = styled.h3`
   margin: 0 0 50px 0;
-`
-
-const BoxLoader = styled.div`
- position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const Loader = styled(CircularProgress)`
- filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(147deg) brightness(83%) contrast(89%);
 `
 
 
@@ -76,7 +65,7 @@ function ModalAddProduct() {
         {
           isActiveLoadingIndicator ?
 
-            <BoxLoader><Loader /></BoxLoader>
+            <Preloader />
 
             : !isActiveLoadingIndicator && !dataNewProduct ?
 

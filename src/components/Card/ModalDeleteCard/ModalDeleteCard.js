@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import Modal from "../../Common/Modal/Modal"
 import { useDispatch, useSelector } from "react-redux"
-import { hideModal } from "../../../redux/slices/modalDeleteCardSlice"
+import { disableLoadingIndicator, enableLoadingIndicator, hideModal } from "../../../redux/slices/modalDeleteCardSlice"
 import { useEffect } from "react"
 import { saveDataProducts } from "../../../redux/slices/productsSlice"
+import api from "../../../api/api"
+import Preloader from "../../Preloader/Preloader"
 
 const CommonBox = styled.div`
   display: flex;
@@ -45,7 +47,7 @@ function ModalDeleteCard() {
   const dataProducts = useSelector((state) => state.products.data)
   const dataDeletingCard = useSelector((state) => state.modalDeleteCard.dataDeletingCard)
   const isVisibleModal = useSelector((state) => state.modalDeleteCard.isVisible)
-
+  const isActiveLoadingIndicator = useSelector((state) => state.modalDeleteCard.isActiveLoadingIndicator)
 
   useEffect(() => {
     if (isVisibleModal) {
@@ -54,7 +56,7 @@ function ModalDeleteCard() {
   }, [isVisibleModal])
 
 
-  
+
   function handleCloseModal() {
     dispatch(hideModal())
   }
@@ -63,24 +65,41 @@ function ModalDeleteCard() {
   function handleDeleteCard() {
     const filteredCards = dataProducts.filter((item) => (item.id !== dataDeletingCard.id))
 
-    dispatch(saveDataProducts(filteredCards))
-    dispatch(hideModal())
-    window.modalDeleteCard.close()
+    dispatch(enableLoadingIndicator())
+
+    api.deleteProduct(dataDeletingCard.id)
+      .then(() => {
+        dispatch(saveDataProducts(filteredCards))
+        dispatch(hideModal())
+      })
+      .catch((err) => console.log('Ошибка: ', err))
+      .finally(() => dispatch(disableLoadingIndicator()))
   }
 
 
-  return (
-    <Modal modalName="modalDeleteCard" callbackCloseModal={handleCloseModal}>
-      <CommonBox>
-        <Title>Вы действительно хотите удалить карточку?</Title>
-        <span>{dataDeletingCard.name}</span>
 
-        <ButtonBox>
-          <Button onClick={handleDeleteCard}>Да</Button>
-          <Button onClick={handleCloseModal}>Отмена</Button>
-        </ButtonBox>
-      </CommonBox>
-    </Modal>
+  return (
+    <>
+      {
+        isActiveLoadingIndicator ?
+
+          <Preloader />
+
+          :
+
+          <Modal modalName="modalDeleteCard" callbackCloseModal={handleCloseModal}>
+            <CommonBox>
+              <Title>Вы действительно хотите удалить карточку?</Title>
+              <span>{dataDeletingCard.name}</span>
+
+              <ButtonBox>
+                <Button onClick={handleDeleteCard}>Да</Button>
+                <Button onClick={handleCloseModal}>Отмена</Button>
+              </ButtonBox>
+            </CommonBox>
+          </Modal>
+      }
+    </>
   )
 }
 

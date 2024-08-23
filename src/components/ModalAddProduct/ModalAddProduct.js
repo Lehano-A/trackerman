@@ -20,7 +20,7 @@ const CommonBox = styled.div`
   min-height: 250px;
 `
 
-const Title = styled.h3`
+const Title = styled.h2`
   margin: 0 0 50px 0;
 `
 

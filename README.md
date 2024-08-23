@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# trackerman
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Здравствуйте! 🖖
 
-## Available Scripts
+## Тип проекта
+trackerman - это pet-проект
 
-In the project directory, you can run:
+## В чём суть проекта
 
-### `npm start`
+В отслеживании цен на определённые товары
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Для кого
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Изначально проект разрабатывал для себя, поэтому пока в "открытую сеть" заливать не планирую 
 
-### `npm test`
+## Как это работает
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Очень просто:
 
-### `npm run build`
+1. Через визуальный интерфейс добавляется ссылка на интересующий товар, которая отправляется на сервер для сбора необходимых данных со страницы.
+2. Сервер отправляет собранные данные обратно и ожидает получения значения от пользователя, которое будет являться целевой-отслеживаемой.
+3. В интерфейс добавляется карточка отслеживаемого товара, а сервер начинает ~поминутную (настраивается) проверку изменения цены.
+4. Если цена изменилась до целевой или ниже, то в телеграм-чат от бота поступит сообщение с информацией о изменении.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Какие особенности
+- Поддерживается пока только одна торговая площадка
+- Сервер приватный и располагается локально без возможности, на текущий момент, определиться удалённо
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Интерфейс
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+На текущий момент можно выполнять следующие действия:
 
-### `npm run eject`
+- Добавлять/удалять карточки товара
+- Взаимодействовать с модальными окнами
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Несмотря на такой маленький список "дозволенного", этого достаточно, чтобы начать отслеживать целевое значение 😊
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Используемые технологии
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- JavaScript
+- React
+- Redux toolkit
+- Material UI
+- styled-components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Установка и начало работы
 
-## Learn More
+```
+git clone https://github.com/Lehano-A/trackerman    <-- клонируем проект
+cd [folder project]    <-- переходим внутрь папки проекта
+npm install    <-- устанавливаем зависимости
+npm start    <-- запускаем проект
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Контакты
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Telegram - @lehano

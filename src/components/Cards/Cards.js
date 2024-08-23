@@ -1,9 +1,6 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import Card from "../Card/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { saveDataProducts } from "../../redux/slices/productsSlice";
-import { getProductList } from "../../api/getProductList/getProductList";
+import { useSelector } from "react-redux";
 
 const CommonBox = styled.section`
   display: grid;
@@ -13,12 +10,6 @@ const CommonBox = styled.section`
 `
 
 function Cards() {
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    getProductList(dispatch, saveDataProducts)
-  }, [])
 
   const dataProducts = useSelector((state) => state.products.data)
 

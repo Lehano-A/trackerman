@@ -3,7 +3,7 @@ import close from "../../../images/icons/close.svg"
 
 const Dialog = styled.dialog`
   position: fixed;
-  max-width: 650px;
+  max-width: ${props => props.$maxWidth || '650px'};
   width: 100%;
   z-index: 99999;
   border: none;
@@ -44,7 +44,7 @@ const IconClose = styled.img`
 `
 
 
-function Modal({ children, callbackCloseModal, modalName }) {
+function Modal({ children, callbackCloseModal, modalName, maxWidth, withoutButtonClose = false }) {
 
 
   function handleClose() {
@@ -54,12 +54,12 @@ function Modal({ children, callbackCloseModal, modalName }) {
 
 
   return (
-    <Dialog id={modalName}>
+    <Dialog $maxWidth={maxWidth} id={modalName}>
 
-      <ButtonClose title="Закрыть" onClick={handleClose}>
+      {!withoutButtonClose && <ButtonClose title="Закрыть" onClick={handleClose}>
         <IconClose src={close} />
       </ButtonClose>
-
+      }
       {children}
 
     </Dialog>

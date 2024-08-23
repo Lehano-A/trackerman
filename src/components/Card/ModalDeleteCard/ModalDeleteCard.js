@@ -14,7 +14,7 @@ const CommonBox = styled.div`
   height: 100%;
 `
 
-const Title = styled.h3`
+const Title = styled.h2`
   margin: 0 0 20px 0;
 `
 

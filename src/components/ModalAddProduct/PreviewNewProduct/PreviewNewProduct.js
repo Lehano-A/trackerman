@@ -5,22 +5,32 @@ import KeyValue from "../../Card/KeyValue/KeyValue"
 import NameLink from "../../Card/NameLink/NameLink"
 import Form from "../../Common/Form/Form"
 import Submit from "../../Common/Form/Submit/Submit"
-import Input from "../../Common/Form/Input/Input"
-import Label from "../../Common/Form/Label/Label"
 import api from "../../../api/api"
 import { useDispatch } from "react-redux"
 import { disableLoadingIndicator, enableLoadingIndicator, hideModalAddProduct } from "../../../redux/slices/modalAddProductSlice"
 import { saveDataProducts } from "../../../redux/slices/productsSlice"
 import { getProductList } from "../../../api/getProductList/getProductList"
+import ChoiseTypeNotification from "../../forms/ChoiseTypeNotification/ChoiseTypeNotification"
+
+const Box = styled.div`
+  &  fieldset {
+    margin-bottom: 50px;
+  }
+
+  & h2 {
+    margin-bottom: 25px;
+  }
+`
 
 const BoxImageAndPrice = styled.div`
   display: flex;
   margin-bottom: 50px;
-
+  
   & > img {
-    margin-right: 80px;
+    margin-right: 40px;
   }
 `
+
 
 function PreviewNewProduct({ data }) {
   const { name, startPriceWithCard, productUrl, imageUrl } = data
@@ -60,7 +70,7 @@ function PreviewNewProduct({ data }) {
 
 
   return (
-    <>
+    <Box>
       <NameLink link={productUrl}>{name}</NameLink>
 
       <BoxImageAndPrice>
@@ -69,17 +79,10 @@ function PreviewNewProduct({ data }) {
       </BoxImageAndPrice>
 
       <Form handleOnSubmit={handleOnSubmit}>
-        <Label options={{ htmlFor: 'inputTargetPrice' }}>Цена отслеживания</Label>
-        <Input options={{
-          id: 'inputTargetPrice',
-          minLength: 1,
-          type: 'number',
-          handleOnChange: handleOnChange,
-          required: true
-        }} />
+        <ChoiseTypeNotification handleOnChange={handleOnChange} />
         <Submit>Отправить</Submit>
       </Form>
-    </>
+    </Box>
   )
 }
 

@@ -5,11 +5,11 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { disableLoadingIndicator, enableLoadingIndicator, hideModalAddProduct } from "../../redux/slices/modalAddProductSlice"
 import Form from "../Common/Form/Form"
-import Label from "../Common/Form/Label/Label"
-import Input from "../Common/Form/Input/Input"
 import Submit from "../Common/Form/Submit/Submit"
 import PreviewNewProduct from "./PreviewNewProduct/PreviewNewProduct"
 import Preloader from "../Preloader/Preloader"
+import InputField from "../../styled/StyledInputField"
+import Label from "../../styled/StyledLabel"
 
 const CommonBox = styled.div`
   position: relative;
@@ -73,14 +73,14 @@ function ModalAddProduct() {
                 <Title>Добавление нового товара</Title>
 
                 <Form handleOnSubmit={handleOnSubmit}>
-                  <Label options={{ htmlFor: 'inputLinkToProduct' }}>Ссылка на товар</Label>
-                  <Input options={{
-                    id: 'inputLinkToProduct',
-                    minLength: 1,
-                    type: 'url',
-                    handleOnChange: handleOnChange,
-                    required: true
-                  }} />
+                  <Label htmlFor="inputLinkToProduct">Ссылка на товар</Label>
+                  <InputField
+                    id="inputLinkToProduct"
+                    minLength={1}
+                    type="url"
+                    onChange={handleOnChange}
+                    required={true}
+                  />
                   <Submit type="submit">Отправить</Submit>
                 </Form>
               </>
